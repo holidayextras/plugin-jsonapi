@@ -20,18 +20,18 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "chai": "^1.9.2",
-    "chai-as-promised": "^4.1.1",
-    "grunt": "~0.4.3",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-jscs": "^0.6.2",
-    "grunt-mocha-test": "^0.12.2",
-    "mocha": "^2.0.1"
+    "chai": "1.9.2",
+    "chai-as-promised": "4.1.1",
+    "grunt": "0.4.3",
+    "grunt-contrib-jshint": "0.10.0",
+    "grunt-jscs": "0.6.2",
+    "grunt-mocha-test": "0.12.2",
+    "mocha": "2.0.1"
   },
   "dependencies": {
-    "boom": "^2.6.1",
-    "lodash": "^2.4.1",
-    "q": "^1.0.1",
-    "qs": "~2.3.3"
+    "boom": "2.6.1",
+    "lodash": "2.4.1",
+    "q": "1.0.1",
+    "qs": "2.3.3"
   }
 }
