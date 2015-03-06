@@ -1,0 +1,37 @@
+{
+  "name": "plugin-jsonapi",
+  "description": "a Hapijs plugin for a jsonapi style output according to our 'house rules'",
+  "version": "0.1.0",
+  "homepage": "https://github.com/holidayextras/plugin-jsonapi",
+  "author": {
+    "name": "Shortbreaks",
+    "email": "shortbreaksdev@holidayextras.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:holidayextras/plugin-jsonapi.git"
+  },
+  "license": "MIT",
+  "main": "index",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "chai-as-promised": "^4.1.1",
+    "grunt": "~0.4.3",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-jscs": "^0.6.2",
+    "grunt-mocha-test": "^0.12.2",
+    "mocha": "^2.0.1"
+  },
+  "dependencies": {
+    "boom": "^2.6.1",
+    "lodash": "^2.4.1",
+    "q": "^1.0.1",
+    "qs": "~2.3.3"
+  }
+}

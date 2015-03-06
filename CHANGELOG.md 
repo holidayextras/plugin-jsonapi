@@ -1,0 +1,16 @@
+## **0.1.0**
+- [**WEB-4162**](https://hxshortbreaks.atlassian.net/browse/WEB-4162) Upgrade to hapijs v8.
+## **0.0.7**
+- [**WEB-3871**](https://hxshortbreaks.atlassian.net/browse/WEB-3871) if context is passed in, pass it on the the relevant controller when auto following links.
+## **0.0.6**
+- [**WEB-3966**](https://hxshortbreaks.atlassian.net/browse/WEB-3966) No longer trying to jsonapi http 204s.
+## **0.0.5**
+- [**WEB-3945**](https://hxshortbreaks.atlassian.net/browse/WEB-3945) Log out fatalaties to logger.
+## **0.0.4**
+- Rewrite testing to use server.inject architecture.
+## **0.0.3**
+- Auto-generate primary resource hrefs.
+## **0.0.2**
+- Ignore path functionality added.
+## **0.0.1**
+- [**WEB-3784**](https://hxshortbreaks.atlassian.net/browse/WEB-3784) Create plugin and unit tests
