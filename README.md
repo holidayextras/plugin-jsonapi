@@ -4,7 +4,7 @@
 
 ## About
 
-A hapijs plugin for a jsonapi style output to all requests.  We are using the [jsonapi](http://jsonapi.org/) standard with our own [house rules](https://bitbucket.org/hxshortbreaks/apischema/src/master/houseRules.md) where we have adapted the standard to suit our needs as a business.
+A [hapi](http://hapijs.com/) plugin for a jsonapi style output to all requests.  We are using the [jsonapi](http://jsonapi.org/) standard with our own [house rules](https://bitbucket.org/hxshortbreaks/apischema/src/master/houseRules.md) where we have adapted the standard to suit our needs as a business.
 
 ## Getting Started
 
@@ -60,7 +60,7 @@ reply( result );
 
 ## Contributing
 
-Code is linted by ".jshintrc" and checked against the coding style guide "shortbreaks.jscs.json". We also use Mocha to test our code, to run all of this use ` $ grunt test `.
+Code is linted by '.jshintrc' and checked against the coding style guide 'shortbreaks.jscs.json'. We also use Mocha to test our code, to run all of this use ` $ grunt test `.
 
 ## License
 Copyright (c) 2015 Shortbreaks
