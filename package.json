@@ -17,16 +17,19 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test && istanbul cover _mocha -- test/ -R spec"
   },
   "devDependencies": {
     "chai": "1.9.2",
     "chai-as-promised": "4.1.1",
-    "grunt": "0.4.3",
-    "grunt-contrib-jshint": "0.10.0",
-    "grunt-jscs": "0.6.2",
+    "grunt": "0.4.5",
+    "grunt-contrib-jshint": "0.11.0",
+    "grunt-jscs": "1.5.0",
     "grunt-mocha-test": "0.12.2",
-    "mocha": "2.0.1"
+    "hapi": "6.4.0",
+    "joi": "^6.0.4",
+    "make-up": "^1.0.3",
+    "mocha": "2.1.0"
   },
   "dependencies": {
     "boom": "2.6.1",

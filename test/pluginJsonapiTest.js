@@ -199,25 +199,25 @@ describe( 'pluginJsonapi', function() {
 		it( 'should boost linked data from a secondary resource up to the primary resource linked data', function( done ) {
 			server.inject( '/anotherPrimaryResource?include=secondaryResourceWithLinked', function( reply ) {
 				reply.result.should.deep.equal( {
-					"anotherPrimaryResource": [ {
-						"foo": "bar",
-						"links": {
-							"secondaryResourceWithLinked": {
-								"href": "/secondaryResourceWithLinked/1",
-								"ids": [1],
-								"type": "secondaryResourceWithLinked"
+					anotherPrimaryResource: [ {
+						foo: 'bar',
+						links: {
+							secondaryResourceWithLinked: {
+								href: '/secondaryResourceWithLinked/1',
+								ids: [1],
+								type: 'secondaryResourceWithLinked'
 							}
 						}
 					} ],
-					"linked": {
-						"primaryLinkedResource": [ {
-							"hey": "you guys"
+					linked: {
+						primaryLinkedResource: [ {
+							hey: 'you guys'
 						} ],
-						"secondaryLinkedResource": [ {
-							"optimusPrime": "isCool"
+						secondaryLinkedResource: [ {
+							optimusPrime: 'isCool'
 						} ],
-						"secondaryResourceWithLinked": [ {
-							"foo": "bar"
+						secondaryResourceWithLinked: [ {
+							foo: 'bar'
 						} ]
 					}
 				} );
