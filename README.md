@@ -1,6 +1,6 @@
 # plugin-jsonapi
 
-[![Build Status](https://travis-ci.org/holidayextras/plugin-jsonapi.svg)](https://travis-ci.org/holidayextras/plugin-jsonapi)
+[ ![Codeship Status for holidayextras/plugin-jsonapi](https://codeship.com/projects/ee954d00-a94f-0132-a308-1e47e7423a87/status?branch=master)](https://codeship.com/projects/67634)
 
 ## About
 
