@@ -1,3 +1,5 @@
+## **0.1.1**
+- [**WEB-4542**](https://hxshortbreaks.atlassian.net/browse/WEB-4542) Upgrade coding styles to current level.
 ## **0.1.0**
 - [**WEB-4162**](https://hxshortbreaks.atlassian.net/browse/WEB-4162) Upgrade to hapijs v8.
 ## **0.0.7**
