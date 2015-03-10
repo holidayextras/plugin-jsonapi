@@ -1,6 +1,6 @@
 # plugin-jsonapi
 
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Build Status](https://travis-ci.org/holidayextras/plugin-jsonapi.svg)](https://travis-ci.org/holidayextras/plugin-jsonapi)
 
 ## About
 
