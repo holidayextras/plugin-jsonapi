@@ -1,6 +1,8 @@
 /* jslint node: true */
 'use strict';
 
+var makeup = require( 'make-up' );
+
 module.exports = function( grunt ) {
 
 	// project configuration
@@ -8,14 +10,14 @@ module.exports = function( grunt ) {
 		mochaTest: {
 			test: {
 				options: {
-					reporter: 'spec',
+					reporter: 'spec'
 				},
 				src: ['test/**/*Test.js']
 			}
 		},
 		jshint: {
 			options: {
-				jshintrc: '.jshintrc'
+				jshintrc: makeup( 'jshintrc.json' )
 			},
 			core: {
 				src: ['*.js', 'lib/**/*.js']
@@ -26,7 +28,7 @@ module.exports = function( grunt ) {
 		},
 		jscs: {
 			options: {
-				config: 'shortbreaks.jscs.json'
+				config: makeup( 'jscsrc.json' )
 			},
 			src: ['<%= jshint.core.src %>', '<%= jshint.test.src %>']
 		}

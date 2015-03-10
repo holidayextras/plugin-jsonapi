@@ -1,6 +1,6 @@
 # plugin-jsonapi
 
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[ ![Codeship Status for holidayextras/plugin-jsonapi](https://codeship.com/projects/ee954d00-a94f-0132-a308-1e47e7423a87/status?branch=master)](https://codeship.com/projects/67634)
 
 ## About
 
@@ -60,7 +60,7 @@ reply( result );
 
 ## Contributing
 
-Code is linted by '.jshintrc' and checked against the coding style guide 'shortbreaks.jscs.json'. We also use Mocha to test our code, to run all of this use ` $ grunt test `.
+Code is linted checked against the style guide with [make-up](https://github.com/holidayextras/make-up), running npm test will run all tests required.
 
 ## License
 Copyright (c) 2015 Shortbreaks
