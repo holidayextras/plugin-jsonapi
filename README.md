@@ -1,6 +1,6 @@
 # plugin-jsonapi
 
-[ ![Codeship Status for holidayextras/plugin-jsonapi](https://codeship.com/projects/ee954d00-a94f-0132-a308-1e47e7423a87/status?branch=master)](https://codeship.com/projects/67634)
+[![Build Status](https://api.shippable.com/projects/54ff09505ab6cc135296f99b/badge?branchName=master)](https://app.shippable.com/projects/54ff09505ab6cc135296f99b/builds/latest)
 
 ## About
 
