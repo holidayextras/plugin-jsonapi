@@ -12,17 +12,14 @@ module.exports = function( grunt ) {
 				jshintrc: makeup( 'jshintrc.json' )
 			},
 			core: {
-				src: ['*.js']
-			},
-			test: {
-				src: ['test/**/*.js']
+				src: [ '**/*.js', '!node_modules/**', '!coverage/**' ]
 			}
 		},
 		jscs: {
 			options: {
 				config: makeup( 'jscsrc.json' )
 			},
-			src: ['<%= jshint.core.src %>', '<%= jshint.test.src %>']
+			src: ['<%= jshint.core.src %>']
 		}
 	} );
 
