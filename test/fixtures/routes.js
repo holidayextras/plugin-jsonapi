@@ -34,6 +34,25 @@ module.exports = [
 			} );
 		}
 	},
+
+	{
+		method: 'GET',
+		path: '/singleResourceObject',
+		config: {
+			bind: {
+				resourceName: 'test'
+			}
+		},
+		handler: function( request, reply ) {
+			reply( {
+				test: {
+					id: '123456789',
+					foo: 'bar'
+				}
+			} );
+		}
+	},
+
 	{
 		method: 'GET',
 		path: '/addHrefToResource',
@@ -198,6 +217,67 @@ module.exports = [
 			reply( {
 				secondaryResource: [ {
 					foo: 'bar'
+				} ]
+			} );
+		}
+	},
+	{
+		method: 'GET',
+		path: '/primaryContextResource',
+		config: {
+			validate: {
+				options: {
+					allowUnknown: true
+				},
+				query: {
+					include: Joi.string().optional()
+				}
+			},
+			bind: {
+				resourceName: 'primaryContextResource'
+			}
+		},
+		handler: function( request, reply ) {
+			// setup the include and context proxy
+			request.data = {
+				query: {
+					include: request.query.include,
+					context: request.query.context
+				}
+			};
+			reply( {
+				primaryContextResource: [ {
+					foo: 'bar',
+					links: {
+						secondaryContextResource: {
+							ids: [1],
+							type: 'secondaryContextResource'
+						}
+					}
+				} ]
+			} );
+		}
+	},
+	{
+		method: 'GET',
+		path: '/secondaryContextResource/{id}',
+		config: {
+			validate: {
+				options: {
+					allowUnknown: true
+				}
+			},
+			bind: {
+				resourceName: 'secondaryContextResource'
+			}
+		},
+		handler: function( request, reply ) {
+			// note we're conditionally adding the a boolean to flag whether the
+			// additionalContextInfo context was proxied successfully
+			reply( {
+				secondaryContextResource: [ {
+					foo: 'bar',
+					additionalContextInfo: request.query.context.secondaryContextResource.additionalContextInfo ? true : false
 				} ]
 			} );
 		}
