@@ -254,6 +254,9 @@ describe( 'pluginJsonapi', function() {
 			} );
 		} );
 
+
+		// TODO: write a test to ensure auth.artifacts are proxied to includes
+
 	} );
 
 } );
