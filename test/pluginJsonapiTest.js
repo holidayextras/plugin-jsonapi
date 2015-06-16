@@ -101,6 +101,19 @@ describe( 'pluginJsonapi', function() {
 			} );
 		} );
 
+		it( 'should handle a single object resource', function( done ) {
+			server.inject( '/singleResourceObject', function( reply ) {
+				reply.result.should.deep.equal( {
+					test: {
+						id: '123456789',
+						foo: 'bar',
+						href: '/test/123456789'
+					}
+				} );
+				done();
+			} );
+		} );
+
 	} );
 
 	describe( 'hrefs', function() {
@@ -197,7 +210,7 @@ describe( 'pluginJsonapi', function() {
 
 	} );
 
-	describe( 'include', function() {
+	describe( 'when "including"', function() {
 
 		it( 'should fetch a single secondary resource and add it to the primary resource linked data', function( done ) {
 			server.inject( '/primaryResource?include=secondaryResource', function( reply ) {
@@ -217,6 +230,32 @@ describe( 'pluginJsonapi', function() {
 					linked: {
 						secondaryResource: [ {
 							foo: 'bar'
+						} ]
+					}
+				} );
+				done();
+			} );
+		} );
+
+		it( 'should fetch a single secondary resource with context info and add it to the primary resource linked data', function( done ) {
+			server.inject( '/primaryContextResource?include=secondaryContextResource&context[secondaryContextResource][additionalContextInfo]=true', function( reply ) {
+				reply.result.should.deep.equal( {
+					primaryContextResource: [
+						{
+							foo: 'bar',
+							links: {
+								secondaryContextResource: {
+									ids: [1],
+									type: 'secondaryContextResource',
+									href: '/secondaryContextResource/1'
+								}
+							}
+						}
+					],
+					linked: {
+						secondaryContextResource: [ {
+							foo: 'bar',
+							additionalContextInfo: true
 						} ]
 					}
 				} );
