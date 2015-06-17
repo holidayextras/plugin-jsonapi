@@ -1,3 +1,5 @@
+## **1.1.1**
+- Tagging went awry, re tag and new version.
 ## **1.1.0**
 - [**WEB-5028**](https://hxshortbreaks.atlassian.net/browse/WEB-5028) Bump hapijs version to 8.6.1 and proxy auth.artfiacts when "including".
 ## **1.0.0**
