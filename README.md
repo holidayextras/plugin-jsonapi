@@ -1,6 +1,6 @@
 # plugin-jsonapi
 
-[![Circle CI](https://circleci.com/gh/holidayextras/plugin-jsonapi/tree/master.svg?style=svg)](https://circleci.com/gh/holidayextras/plugin-jsonapi/tree/master)
+[![Circle CI](https://circleci.com/gh/holidayextras/plugin-jsonapi.svg?style=svg&circle-token=e30239f6be095cb1c8e0dd8d99f3bf2348ec63ca)](https://circleci.com/gh/holidayextras/plugin-jsonapi)
 
 ## About
 
