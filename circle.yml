@@ -1,0 +1,37 @@
+machine:
+  node:
+    version: 0.10.38
+dependencies:
+  pre:
+    - curl -O https://raw.githubusercontent.com/holidayextras/deployment-helpers/master/nodeApps/checkRelease.sh
+    - curl -O https://raw.githubusercontent.com/holidayextras/deployment-helpers/master/nodeApps/markRelease.sh
+    - chmod +x checkRelease.sh
+    - chmod +x markRelease.sh
+    - ./checkRelease.sh
+    - npm install grunt grunt-cli istanbul -g
+test:
+  pre:
+    - mkdir -p $CIRCLE_TEST_REPORTS/unit
+    - mkdir -p $CIRCLE_TEST_REPORTS/coverage
+  override:
+    - grunt jshint
+    - grunt jscs
+    - istanbul cover _mocha --  --timeout 15000 --recursive test/**/*Test.js -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml
+  post:
+    - cp -r ./coverage/ $CIRCLE_ARTIFACTS/coverage
+deployment:
+  production:
+    branch: master
+    commands:
+      - ./markRelease.sh production
+  staging:
+    branch: staging
+    commands:
+      - ./markRelease.sh staging
+
+experimental:
+  notify:
+    branches:
+      only:
+        - master
+        - staging
