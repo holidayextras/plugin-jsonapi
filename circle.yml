@@ -20,11 +20,11 @@ deployment:
   production:
     branch: master
     commands:
-      - node_modules/deployment-helpers/nodeApps/postRelease.sh  production
+      - node_modules/deployment-helpers/nodeApps/postRelease.sh production
   staging:
     branch: staging
     commands:
-      - node_modules/deployment-helpers/nodeApps/postRelease.sh  staging
+      - node_modules/deployment-helpers/nodeApps/postRelease.sh staging
 
 experimental:
   notify:
