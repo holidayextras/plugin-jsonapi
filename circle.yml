@@ -3,11 +3,8 @@ machine:
     version: 0.10.38
 dependencies:
   pre:
-    - curl -O https://raw.githubusercontent.com/holidayextras/deployment-helpers/master/nodeApps/checkRelease.sh
-    - curl -O https://raw.githubusercontent.com/holidayextras/deployment-helpers/master/nodeApps/markRelease.sh
-    - chmod +x checkRelease.sh
-    - chmod +x markRelease.sh
-    - ./checkRelease.sh
+    - npm install git+ssh://git@github.com:holidayextras/deployment-helpers.git
+    - node_modules/deployment-helpers/nodeApps/preRelease.sh
     - npm install grunt grunt-cli istanbul mocha -g
 test:
   pre:
@@ -23,11 +20,11 @@ deployment:
   production:
     branch: master
     commands:
-      - ./markRelease.sh production
+      - node_modules/deployment-helpers/nodeApps/postRelease.sh  production
   staging:
     branch: staging
     commands:
-      - ./markRelease.sh staging
+      - node_modules/deployment-helpers/nodeApps/postRelease.sh  staging
 
 experimental:
   notify:
