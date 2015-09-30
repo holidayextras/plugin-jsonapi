@@ -1,0 +1,34 @@
+machine:
+  node:
+    version: 0.10.38
+dependencies:
+  pre:
+    - npm install git+ssh://git@github.com:holidayextras/deployment-helpers.git
+    - node_modules/deployment-helpers/nodeApps/preRelease.sh
+    - npm install grunt grunt-cli istanbul mocha -g
+test:
+  pre:
+    - mkdir -p $CIRCLE_TEST_REPORTS/unit
+    - mkdir -p $CIRCLE_TEST_REPORTS/coverage
+  override:
+    - grunt jshint
+    - grunt jscs
+    - istanbul cover _mocha --  --timeout 15000 --recursive test/**/*Test.js -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml
+  post:
+    - cp -r ./coverage/ $CIRCLE_ARTIFACTS/coverage
+deployment:
+  production:
+    branch: master
+    commands:
+      - node_modules/deployment-helpers/nodeApps/postRelease.sh production
+  staging:
+    branch: staging
+    commands:
+      - node_modules/deployment-helpers/nodeApps/postRelease.sh staging
+
+experimental:
+  notify:
+    branches:
+      only:
+        - master
+        - staging

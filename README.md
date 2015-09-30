@@ -1,6 +1,6 @@
 # plugin-jsonapi
 
-[![Build Status](https://api.shippable.com/projects/54ff09505ab6cc135296f99b/badge?branchName=master)](https://app.shippable.com/projects/54ff09505ab6cc135296f99b/builds/latest)
+[![Circle CI](https://circleci.com/gh/holidayextras/plugin-jsonapi/tree/master.svg?style=svg&circle-token=e30239f6be095cb1c8e0dd8d99f3bf2348ec63ca)](https://circleci.com/gh/holidayextras/plugin-jsonapi)
 
 ## About
 
