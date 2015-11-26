@@ -3,7 +3,7 @@
 
 var Hapi = require( 'hapi' );
 var chai = require( 'chai' );
-chai.should();
+var expect = chai.expect;
 var sinon = require( 'sinon' );
 
 var pluginLocation = '../lib/pluginJsonapi.js';
@@ -42,7 +42,7 @@ describe( 'pluginJsonapi', function() {
 
   describe( '#register', function() {
     it( 'should allow us to access the plugin off the hapi server', function( done ) {
-      server.plugins[pluginName].should.not.be.undefined;
+      expect( server.plugins[pluginName] ).to.not.be.undefined;
       done();
     } );
   } );
@@ -51,7 +51,7 @@ describe( 'pluginJsonapi', function() {
 
     describe( 'check the function is created', function() {
       it( 'should expose makeItSo as a function on the plugin', function( done ) {
-        server.plugins[pluginName].makeItSo.should.be.a( 'function' );
+        expect( server.plugins[pluginName].makeItSo ).to.be.a( 'function' );
         done();
       } );
     } );
@@ -61,22 +61,22 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should not try to add any jsonapiness to the lout documentation', function( done ) {
       server.inject( '/', function( reply ) {
-        reply.result.should.equal( require( './fixtures/loutReply.js' ) );
+        expect( reply.result ).to.equal( require( './fixtures/loutReply.js' ) );
         done();
       } );
     } );
 
     it( 'should not try to add any jsonapiness to any 204 (DELETE) responses', function( done ) {
       server.inject( { url: '/delete', method: 'DELETE' }, function( reply ) {
-        reply.should.have.property( 'result' ).that.is.null;
-        reply.statusCode.should.equal( 204 );
+        expect( reply ).to.have.property( 'result' ).that.is.null;
+        expect( reply.statusCode ).to.equal( 204 );
         done();
       } );
     } );
 
     it( 'should 500 if resourceName isnt bound to the handler config', function( done ) {
       server.inject( '/noResourceName', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           statusCode: 500,
           error: 'Internal Server Error',
           message: 'An internal server error occurred'
@@ -87,21 +87,21 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should return an empty object with a successfully configured handler', function( done ) {
       server.inject( '/hasResourceName', function( reply ) {
-        reply.result.should.deep.equal( {} );
+        expect( reply.result ).to.deep.equal( {} );
         done();
       } );
     } );
 
     it( 'should return an the reply "as is" if no resourceName found', function( done ) {
       server.inject( '/resourceNotDefined', function( reply ) {
-        reply.result.should.deep.equal( { foo: 'bar' } );
+        expect( reply.result ).to.deep.equal( { foo: 'bar' } );
         done();
       } );
     } );
 
     it( 'should handle a single object resource', function( done ) {
       server.inject( '/singleResourceObject', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           test: {
             id: '123456789',
             foo: 'bar',
@@ -118,21 +118,21 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should add href to resources with an id', function( done ) {
       server.inject( '/addHrefToResource', function( reply ) {
-        reply.result.should.deep.equal( { test: [ { id: '123456789', foo: 'bar', href: '/test/123456789' } ] } );
+        expect( reply.result ).to.deep.equal( { test: [ { id: '123456789', foo: 'bar', href: '/test/123456789' } ] } );
         done();
       } );
     } );
 
     it( 'should not add href to resources without an id', function( done ) {
       server.inject( '/dontAddHrefToResource', function( reply ) {
-        reply.result.should.deep.equal( { test: [ { foo: 'bar' } ] } );
+        expect( reply.result ).to.deep.equal( { test: [ { foo: 'bar' } ] } );
         done();
       } );
     } );
 
     it( 'should add href to resource links that have a type and an id', function( done ) {
       server.inject( '/addHrefToResourceLinkWithTypeAndId', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           test: [
             {
               foo: 'bar',
@@ -152,7 +152,7 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should add href to resource links that have a type and multiple ids', function( done ) {
       server.inject( '/addHrefToResourceLinkWithTypeAndMultipleIds', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           test: [
             {
               foo: 'bar',
@@ -172,7 +172,7 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should not add href to resource links that have no type', function( done ) {
       server.inject( '/addHrefToResourceLinkWithNoType', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           test: [
             {
               foo: 'bar',
@@ -190,7 +190,7 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should not add href to resource links that have no ids', function( done ) {
       server.inject( '/addHrefToResourceLinkWithNoIds', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           test: [
             {
               foo: 'bar',
@@ -212,7 +212,7 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should fetch a single secondary resource and add it to the primary resource linked data', function( done ) {
       server.inject( '/primaryResource?include=secondaryResource', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           primaryResource: [
             {
               foo: 'bar',
@@ -237,7 +237,7 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should fetch a single secondary resource with context info and add it to the primary resource linked data', function( done ) {
       server.inject( '/primaryContextResource?include=secondaryContextResource&context[secondaryContextResource][additionalContextInfo]=true', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           primaryContextResource: [
             {
               foo: 'bar',
@@ -263,7 +263,7 @@ describe( 'pluginJsonapi', function() {
 
     it( 'should boost linked data from a secondary resource up to the primary resource linked data', function( done ) {
       server.inject( '/anotherPrimaryResource?include=secondaryResourceWithLinked', function( reply ) {
-        reply.result.should.deep.equal( {
+        expect( reply.result ).to.deep.equal( {
           anotherPrimaryResource: [ {
             foo: 'bar',
             links: {
