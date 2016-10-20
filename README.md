@@ -29,7 +29,7 @@ When configuring your handler function you **MUST** have a bind property and def
 
 ```
 bind: {
-	resourceName: 'things' // always plural...
+  resourceName: 'things' // always plural...
 }
 ```
 
@@ -47,12 +47,12 @@ result[this.resourceName] = resourceData; // `resourceData` must be an array of 
 // meta is namespaced off the root and is optional
 result.meta = {};
 result.meta[this.resourceName] = {
-	currency: 'GBP'
+  currency: 'GBP'
 }
 // linked is also namespaced off the root and is optional
 result.linked = {};
 result.linked[this.resourceName] = [ {
-	linkedStuff: {} //more objects
+  linkedStuff: {} //more objects
 } ]
 
 reply( result );
@@ -63,5 +63,5 @@ reply( result );
 Code is linted checked against the style guide with [make-up](https://github.com/holidayextras/make-up), running npm test will run all tests required.
 
 ## License
-Copyright (c) 2015 Holiday Extras
+Copyright (c) 2016 Holiday Extras
 Licensed under the MIT license.
