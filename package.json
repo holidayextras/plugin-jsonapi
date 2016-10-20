@@ -1,7 +1,7 @@
 {
   "name": "plugin-jsonapi",
   "description": "A hapi plugin for a jsonapi style output according to our 'house rules'",
-  "version": "1.3",
+  "version": "1.3.0",
   "homepage": "https://github.com/holidayextras/plugin-jsonapi",
   "author": {
     "name": "Shortbreaks",
