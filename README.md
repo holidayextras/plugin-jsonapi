@@ -23,6 +23,97 @@ Jsonapi will look for 3 different properties in its response:
 - Meta (information about the resource e.g. pagination details)
 - Linked resources (associated resources that were requested by the client in the form of `includes`)
 
+
+#### Linked Resources
+The plugin will build the href for all the linked resources, the minimum required is **type**.
+ex:
+```
+{
+  ...
+  "linked": {
+    "faqs": [
+      "type": "faqs"
+    ]
+  }
+  ...
+}
+```
+The plugin will build the href as:
+```
+{
+  ...
+  "linked": {
+    "faqs": [
+      "type": "faqs",
+      "href": "/faqs/"
+    ]
+  }
+  ...
+}
+```
+
+* **Ids**
+Ids is an array of strings, it can contain one or more strings
+```
+{
+  ...
+  "linked": {
+    "faqs": [
+      "ids": ["ID1", "ID2"],
+      "type": "faqs"
+    ]
+  }
+  ...
+}
+```
+The plugin will build the href as:
+```
+{
+  ...
+  "linked": {
+    "faqs": [
+      "ids": ["ID1", "ID2"],
+      "type": "faqs",
+      "href": "/faqs/ID1,ID2"
+    ]
+  }
+  ...
+}
+```
+
+* **filter**
+Filter is an object which allow add some query string parameters, this will be a key value pair.
+The key will be used for the filter and the value is an array of strings.
+```
+{
+  ...
+  "linked": {
+    "faqs": [
+      "type": "faqs",
+      "filter": {
+        "productIds": ["ID1", "ID2"]
+      }
+    ]
+  }
+  ...
+}
+```
+The plugin will build the href as:
+```
+{
+  ...
+  "linked": {
+    "faqs": [
+      "type": "faqs",
+      "href": "/faqs/?filter%5BproductIds%5D=ID1,ID2"
+    ]
+  }
+  ...
+}
+```
+
+You can combine **ids** and **filter**.
+
 #### Configuring your hapijs handler to use 'jsonapi'
 
 When configuring your handler function you **MUST** have a bind property and define the resourceName.
