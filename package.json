@@ -20,15 +20,18 @@
     "test": "node_modules/deployment-helpers/nodeApps/preRelease.sh && node_modules/.bin/make-up lib test && istanbul cover _mocha -- --recursive -R spec"
   },
   "devDependencies": {
-    "chai": "1.9.1",
-    "chai-as-promised": "4.3.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
     "deployment-helpers": "git+ssh://git@github.com:holidayextras/deployment-helpers.git",
+    "dirty-chai": "^1.2.2",
     "hapi": "8.6.1",
-    "istanbul": "0.3.7",
+    "istanbul": "^0.4.4",
     "joi": "6.1.2",
     "make-up": "^9.3.1",
-    "mocha": "1.20.1",
-    "sinon": "1.14.1"
+    "mocha": "^3.0.2",
+    "sinon": "^1.17.4",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "boom": "2.6.1",
