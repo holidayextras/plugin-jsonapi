@@ -324,7 +324,52 @@ describe('utilities', function() {
   });
 
 
-  // _getResourcesLinks
+  describe('#_getResourcesLinks', function() {
+
+    beforeEach(function() {
+      sandbox.stub(utilities, '_buildHref').returns('HREF');
+    });
+
+    it('should build the href for the resource', function() {
+      var links = [
+        {
+          ids: ['ID'],
+          type: 'TYPE'
+        }
+      ];
+
+      var expected = [
+        {
+          ids: ['ID'],
+          type: 'TYPE',
+          href: 'HREF'
+        }
+      ];
+
+      utilities._getResourcesLinks(links);
+      expect(links).to.be.deep.equal(expected);
+    });
+
+    it('should build the href for the resource and remove the filter', function() {
+      var links = [
+        {
+          filter: 'FILTER',
+          type: 'TYPE'
+        }
+      ];
+
+      var expected = [
+        {
+          type: 'TYPE',
+          href: 'HREF'
+        }
+      ];
+
+      utilities._getResourcesLinks(links);
+      expect(links).to.be.deep.equal(expected);
+    });
+
+  });
   // _requestSubResource
 
 });
