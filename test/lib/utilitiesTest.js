@@ -226,7 +226,104 @@ describe('utilities', function() {
     });
   });
 
-  // _addSubResourceRequest
+
+  describe('#_addSubResourceRequest', function() {
+
+    it('should add the link to the subResources', function() {
+      var link = {
+        ids: ['ID'],
+        type: 'TYPE'
+      };
+
+      var subResources = {};
+
+      var expected = {
+        TYPE: {
+          ids: ['ID']
+        }
+      };
+
+      utilities._addSubResourceRequest(subResources, link);
+      expect(subResources).to.be.deep.equal(expected);
+    });
+
+    it('should add a new id to the already existing subResource', function() {
+      var link = {
+        ids: ['ID2'],
+        type: 'TYPE'
+      };
+
+      var subResources = {
+        TYPE: {
+          ids: ['ID1']
+        }
+      };
+
+      var expected = {
+        TYPE: {
+          ids: ['ID1', 'ID2']
+        }
+      };
+
+      utilities._addSubResourceRequest(subResources, link);
+      expect(subResources).to.be.deep.equal(expected);
+    });
+
+    it('should add the link to the subResources (new filter)', function() {
+      var link = {
+        filter: {
+          FILTER: ['FILTER_VALUE']
+        },
+        type: 'TYPE'
+      };
+
+      var subResources = {};
+
+      var expected = {
+        TYPE: {
+          ids: [],
+          filter: {
+            FILTER: ['FILTER_VALUE']
+          }
+        }
+      };
+
+      utilities._addSubResourceRequest(subResources, link);
+      expect(subResources).to.be.deep.equal(expected);
+    });
+
+    it('should add a new filter id to the alredy existed subResource (new filter)', function() {
+      var link = {
+        filter: {
+          FILTER: ['FILTER_VALUE2']
+        },
+        type: 'TYPE'
+      };
+
+      var subResources = {
+        TYPE: {
+          ids: [],
+          filter: {
+            FILTER: ['FILTER_VALUE1']
+          }
+        }
+      };
+
+      var expected = {
+        TYPE: {
+          ids: [],
+          filter: {
+            FILTER: ['FILTER_VALUE1', 'FILTER_VALUE2']
+          }
+        }
+      };
+
+      utilities._addSubResourceRequest(subResources, link);
+      expect(subResources).to.be.deep.equal(expected);
+    });
+  });
+
+
   // _getResourcesLinks
   // _requestSubResource
 
