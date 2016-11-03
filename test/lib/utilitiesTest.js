@@ -120,7 +120,6 @@ describe('utilities', function() {
   });
 
 
-
   describe('#resolveLinkedData', function() {
 
     beforeEach(function() {
@@ -134,12 +133,10 @@ describe('utilities', function() {
       }));
     });
 
-
     it('should return early as no sub reources are provided', function() {
 
       return expect(utilities.resolveLinkedData({})).to.eventually.be.undefined();
     });
-
 
     it('should attach the sub reources as linked', function() {
       var stateObject = {
@@ -175,4 +172,62 @@ describe('utilities', function() {
       });
     });
   });
+
+
+  describe('#_buildHref', function() {
+
+    it('should return an URL the type and id', function() {
+      var hrefParameters = {
+        ids: ['ID'],
+        type: 'TYPE'
+      };
+
+      var expected = '/TYPE/ID';
+
+      expect(utilities._buildHref(hrefParameters)).to.be.equal(expected);
+    });
+
+    it('should return an URL the type and the ids as comma separated list', function() {
+      var hrefParameters = {
+        ids: ['ID1', 'ID2'],
+        type: 'TYPE'
+      };
+
+      var expected = '/TYPE/ID1,ID2';
+
+      expect(utilities._buildHref(hrefParameters)).to.be.equal(expected);
+    });
+
+    it('should return an URL the type and the filter added as a query string', function() {
+      var hrefParameters = {
+        type: 'TYPE',
+        filter: {
+          FILTER: ['FILTER_VALUE']
+        }
+      };
+
+      var expected = '/TYPE/?filter%5BFILTER%5D=FILTER_VALUE';
+
+      expect(utilities._buildHref(hrefParameters)).to.be.equal(expected);
+    });
+
+    it('should return an URL the type, ids and the filter added as a query string', function() {
+      var hrefParameters = {
+        ids: ['ID1', 'ID2'],
+        type: 'TYPE',
+        filter: {
+          FILTER: ['FILTER_VALUE']
+        }
+      };
+
+      var expected = '/TYPE/ID1,ID2?filter%5BFILTER%5D=FILTER_VALUE';
+
+      expect(utilities._buildHref(hrefParameters)).to.be.equal(expected);
+    });
+  });
+
+  // _addSubResourceRequest
+  // _getResourcesLinks
+  // _requestSubResource
+
 });
