@@ -14,7 +14,7 @@
   "license": "MIT",
   "main": "index",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.4.4"
   },
   "scripts": {
     "test": "node_modules/deployment-helpers/nodeApps/preRelease.sh && node_modules/.bin/make-up lib test && istanbul cover _mocha -- --recursive -R spec"
