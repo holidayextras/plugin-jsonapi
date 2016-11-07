@@ -4,6 +4,7 @@
 var Hapi = require('hapi');
 
 var pluginLocation = '../lib/pluginJsonapi';
+var pluginJsonapi = require(pluginLocation);
 var pluginName = 'plugin-jsonapi';
 var server;
 
@@ -35,6 +36,10 @@ describe('pluginJsonapi', function() {
     server.register({ register: require(pluginLocation) }, function() {
       done();
     });
+  });
+
+  afterEach(function() {
+    sandbox.restore();
   });
 
   describe('#register', function() {
@@ -305,6 +310,93 @@ describe('pluginJsonapi', function() {
 
         done();
       });
+    });
+
+  });
+
+
+  describe('#errorHandler', function() {
+    it('should call the request log with an error', function() {
+      var request = {
+        log: sandbox.spy(),
+        data: 'DATA'
+      };
+
+      var requestLogSpy = request.log;
+      var reply = sandbox.stub();
+      var error = new Error('ERROR_HANDLER');
+
+      var expectedRequestLogWithArgument2 = {
+        error: 'Error: ERROR_HANDLER',
+        data: 'DATA'
+      };
+
+      pluginJsonapi.errorHandler(request, reply, error);
+      expect(requestLogSpy.args[0][1]).to.be.deep.equal(expectedRequestLogWithArgument2);
+    });
+  });
+
+
+  describe('#alsoMakeItSo', function() {
+    it('should return early when isBoom is true', function() {
+      var request = {
+        response: {
+          isBoom: true
+        }
+      };
+
+      var reply = {
+        continue: sandbox.spy()
+      };
+      var replyContinueSpy = reply.continue;
+
+      pluginJsonapi.alsoMakeItSo(request, reply);
+      expect(replyContinueSpy).to.be.calledOnce();
+    });
+
+    it('should throw an error when the request.route.settings.bind.resourceName is not set', function() {
+      var errorHandlerSpy = sandbox.spy(pluginJsonapi, 'errorHandler');
+      var request = {
+        log: sandbox.spy(),
+        response: {
+          source: 'SOURCE'
+        }
+      };
+
+      var requestLogSpy = request.log;
+
+      var reply = sandbox.stub();
+
+      pluginJsonapi.alsoMakeItSo(request, reply);
+      expect(errorHandlerSpy).to.be.calledOnce();
+
+      expect(requestLogSpy.args[0][1].error).to.be.equal('Error: configuration bind.resourceName not found on handler');
+    });
+
+    it('should return early when no resources are found', function() {
+      var request = {
+        response: {
+          isBoom: false,
+          source: {
+            foo: 'bar'
+          }
+        },
+        route: {
+          settings: {
+            bind: {
+              resourceName: 'RESOURCE_NAME'
+            }
+          }
+        }
+      };
+
+      var reply = {
+        continue: sandbox.spy()
+      };
+      var replyContinueSpy = reply.continue;
+
+      pluginJsonapi.alsoMakeItSo(request, reply);
+      expect(replyContinueSpy).to.be.calledOnce();
     });
 
   });
