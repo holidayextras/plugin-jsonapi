@@ -3,8 +3,7 @@
 
 var Hapi = require('hapi');
 
-var pluginLocation = '../lib/pluginJsonapi';
-var pluginJsonapi = require(pluginLocation);
+var pluginJsonapi = require('../../lib/pluginJsonapi');
 var pluginName = 'plugin-jsonapi';
 var server;
 
@@ -33,7 +32,7 @@ describe('pluginJsonapi', function() {
     server.methods.getConfig = sinon.stub().returns({
       cache: false
     }); // not testing the cache either
-    server.register({ register: require(pluginLocation) }, function() {
+    server.register({ register: pluginJsonapi }, function() {
       done();
     });
   });
