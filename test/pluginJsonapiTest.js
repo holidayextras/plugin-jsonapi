@@ -2,11 +2,8 @@
 'use strict';
 
 var Hapi = require( 'hapi' );
-var chai = require( 'chai' );
-var expect = chai.expect;
-var sinon = require( 'sinon' );
 
-var pluginLocation = '../lib/pluginJsonapi.js';
+var pluginLocation = '../lib/pluginJsonapi';
 var pluginName = 'plugin-jsonapi';
 var server;
 

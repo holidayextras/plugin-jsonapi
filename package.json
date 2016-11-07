@@ -17,11 +17,17 @@
     "node": ">= 4.4.4"
   },
   "scripts": {
-    "test": "node_modules/deployment-helpers/nodeApps/preRelease.sh && node_modules/.bin/make-up lib test && istanbul cover _mocha -- --recursive -R spec"
+    "ci": "node_modules/.bin/istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
+    "lint": "node_modules/.bin/make-up lib test",
+    "prerelease": "node_modules/deployment-helpers/nodeApps/preRelease.sh",
+    "pretest": "npm run prerelease",
+    "test:coverage": "istanbul cover _mocha",
+    "test": "npm run lint && npm run test:coverage"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
+    "coverage-percentage": "^0.0.2",
     "deployment-helpers": "git+ssh://git@github.com:holidayextras/deployment-helpers.git",
     "dirty-chai": "^1.2.2",
     "hapi": "8.6.1",
