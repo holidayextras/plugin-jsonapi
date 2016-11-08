@@ -1,7 +1,7 @@
 {
   "name": "plugin-jsonapi",
   "description": "A hapi plugin for a jsonapi style output according to our 'house rules'",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "homepage": "https://github.com/holidayextras/plugin-jsonapi",
   "author": {
     "name": "Shortbreaks",
@@ -14,25 +14,34 @@
   "license": "MIT",
   "main": "index",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.4.4"
   },
   "scripts": {
-    "test": "node_modules/deployment-helpers/nodeApps/preRelease.sh && node_modules/.bin/make-up lib test && istanbul cover _mocha -- --recursive -R spec"
+    "ci": "node_modules/.bin/istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
+    "lint": "node_modules/.bin/make-up lib test",
+    "prerelease": "node_modules/deployment-helpers/nodeApps/preRelease.sh",
+    "pretest": "npm run prerelease",
+    "test:coverage": "istanbul cover _mocha",
+    "test": "npm run lint && npm run test:coverage"
   },
   "devDependencies": {
-    "chai": "1.9.1",
-    "chai-as-promised": "4.3.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "coverage-percentage": "^0.0.2",
     "deployment-helpers": "git+ssh://git@github.com:holidayextras/deployment-helpers.git",
+    "dirty-chai": "^1.2.2",
     "hapi": "8.6.1",
-    "istanbul": "0.3.7",
+    "istanbul": "^0.4.4",
     "joi": "6.1.2",
-    "make-up": "6.0.0",
-    "mocha": "1.20.1",
-    "sinon": "1.14.1"
+    "make-up": "^9.3.1",
+    "mocha": "^3.0.2",
+    "sinon": "^1.17.4",
+    "sinon-as-promised": "^4.0.2",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "boom": "2.6.1",
-    "lodash": "2.4.1",
+    "lodash": "4.16.5",
     "q": "1.0.1",
     "qs": "2.3.3"
   }
