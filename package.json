@@ -1,7 +1,7 @@
 {
   "name": "plugin-jsonapi",
   "description": "A hapi plugin for a jsonapi style output according to our 'house rules'",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "homepage": "https://github.com/holidayextras/plugin-jsonapi",
   "author": {
     "name": "Shortbreaks",
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "ci": "node_modules/.bin/istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
-    "lint": "node_modules/.bin/make-up lib test",
+    "lint": "node_modules/.bin/make-up lib test -i eslint",
     "prerelease": "node_modules/deployment-helpers/nodeApps/preRelease.sh",
     "pretest": "npm run prerelease",
     "test:coverage": "istanbul cover _mocha",
