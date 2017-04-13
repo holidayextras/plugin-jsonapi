@@ -208,7 +208,7 @@ describe('utilities', function() {
 
       var expected = '/TYPE/?filter%5BFILTER%5D=FILTER_VALUE';
 
-      expect(utilities._buildHref(hrefParameters)).to.be.equal(expected);
+      expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected);
     });
 
     it('should return an URL the type, ids and the filter added as a query string', function() {
@@ -222,7 +222,7 @@ describe('utilities', function() {
 
       var expected = '/TYPE/ID1,ID2?filter%5BFILTER%5D=FILTER_VALUE';
 
-      expect(utilities._buildHref(hrefParameters)).to.be.equal(expected);
+      expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected);
     });
   });
 
