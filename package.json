@@ -14,11 +14,11 @@
   "license": "MIT",
   "main": "index",
   "engines": {
-    "node": ">=4.4.4"
+    "node": ">=6.9.4"
   },
   "scripts": {
-    "ci": "node_modules/.bin/istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
-    "lint": "node_modules/.bin/make-up -i eslint lib test",
+    "ci": "istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
+    "lint": "standard",
     "prerelease": "node_modules/deployment-helpers/nodeApps/preRelease.sh",
     "pretest": "npm run prerelease",
     "test:coverage": "istanbul cover _mocha",
@@ -26,23 +26,35 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "chai-as-promised": "^5.3.0",
+    "chai-as-promised": "^6.0.0",
     "coverage-percentage": "^0.0.2",
     "deployment-helpers": "git+ssh://git@github.com:holidayextras/deployment-helpers.git",
     "dirty-chai": "^1.2.2",
-    "hapi": "8.6.1",
+    "hapi": "16.1.1",
     "istanbul": "^0.4.4",
-    "joi": "6.1.2",
-    "make-up": "^10.0.0",
+    "joi": "10.4.1",
     "mocha": "^3.0.2",
     "sinon": "^1.17.4",
     "sinon-as-promised": "^4.0.2",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "standard": "^10.0.1"
   },
   "dependencies": {
-    "boom": "2.6.1",
-    "lodash": "4.16.5",
-    "q": "1.0.1",
-    "qs": "2.3.3"
+    "boom": "4.3.1",
+    "lodash": "4.17.4",
+    "q": "1.5.0",
+    "qs": "6.4.0"
+  },
+  "standard": {
+    "globals": [
+      "sinon",
+      "describe",
+      "before",
+      "beforeEach",
+      "afterEach",
+      "sandbox",
+      "it",
+      "expect"        
+    ]
   }
 }
