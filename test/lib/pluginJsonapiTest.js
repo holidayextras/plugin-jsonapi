@@ -30,7 +30,12 @@ describe('pluginJsonapi', function () {
     server.methods.getConfig = sinon.stub().returns({
       cache: false
     }) // not testing the cache either
-    server.register({ register: pluginJsonapi }, function () {
+    server.register([
+      {
+        register: pluginJsonapi
+      }, {
+        register: require('hapi-qs')
+      } ], function () {
       done()
     })
   })
