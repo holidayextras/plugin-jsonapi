@@ -372,4 +372,99 @@ describe('utilities', function() {
   });
   // _requestSubResource
 
+  describe('#collectProxyableValues', function() {
+
+    var stateObject = {
+      request: {
+        data: {
+          query: {
+            agent: 'CCP01',
+            customerCode: 'Q',
+            ticketRates: {
+              startDate: '2017-10-09T00:00:00.000Z',
+              bucket: 'CBF',
+              numAdults: '2',
+              numChildren: '2',
+              numInfants: '0',
+              numInfants1: '0',
+              numInfants2: '',
+              adults: '2',
+              children: '2',
+              infants: '0'
+            },
+            context: {
+              hotelProducts: {
+                checkinDate: '2017-10-09'
+              }
+            }
+          }
+        }
+      },
+      proxyableKeys: [
+        'contentVersion',
+        'lang',
+        'ticketRates',
+        'agent',
+        'customerCode'
+      ]
+    };
+
+    var expectedStateObject = {
+      request: {
+        data: {
+          query: {
+            agent: 'CCP01',
+            customerCode: 'Q',
+            ticketRates: {
+              startDate: '2017-10-09T00:00:00.000Z',
+              bucket: 'CBF',
+              numAdults: '2',
+              numChildren: '2',
+              numInfants: '0',
+              numInfants1: '0',
+              numInfants2: '',
+              adults: '2',
+              children: '2',
+              infants: '0'
+            },
+            context: {
+              hotelProducts: {
+                checkinDate: '2017-10-09'
+              }
+            }
+          }
+        }
+      },
+      proxyableKeys: [
+        'contentVersion',
+        'lang',
+        'ticketRates',
+        'agent',
+        'customerCode'
+      ],
+      proxiedValues: {
+        agent: 'CCP01',
+        customerCode: 'Q',
+        ticketRates: {
+          startDate: '2017-10-09T00:00:00.000Z',
+          bucket: 'CBF',
+          numAdults: '2',
+          numChildren: '2',
+          numInfants: '0',
+          numInfants1: '0',
+          numInfants2: '',
+          adults: '2',
+          children: '2',
+          infants: '0'
+        }
+      }
+    };
+
+    it('should build up an object of values to be proxied back up', function() {
+      return utilities.collectProxyableValues(stateObject)
+      .then(function(result) {
+        expect(result).to.deep.equal(expectedStateObject);
+      });
+    });
+  });
 });

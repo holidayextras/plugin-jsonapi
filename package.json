@@ -14,7 +14,7 @@
   "license": "MIT",
   "main": "index",
   "engines": {
-    "node": ">= 4.4.4"
+    "node": ">=4.4.4"
   },
   "scripts": {
     "ci": "node_modules/.bin/istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
@@ -33,7 +33,7 @@
     "hapi": "8.6.1",
     "istanbul": "^0.4.4",
     "joi": "6.1.2",
-    "make-up": "^9.3.1",
+    "make-up": "^10.0.0",
     "mocha": "^3.0.2",
     "sinon": "^1.17.4",
     "sinon-as-promised": "^4.0.2",
