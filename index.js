@@ -1,5 +1,5 @@
 /* jslint node: true */
-'use strict';
+'use strict'
 
 /*
 * @name /index.js
@@ -8,4 +8,4 @@
 * @author Kevin Hodges <kevin.hodges@holidayextras.com>
 */
 
-module.exports = require( './lib/pluginJsonapi.js' );
+module.exports = require('./lib/pluginJsonapi.js')

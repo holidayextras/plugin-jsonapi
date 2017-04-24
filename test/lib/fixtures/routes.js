@@ -1,13 +1,13 @@
 /* eslint no-unneeded-ternary:0 */
-'use strict';
-var Joi = require( 'joi' );
+'use strict'
+var Joi = require('joi')
 
 module.exports = [
   {
     method: 'GET',
     path: '/noResourceName',
-    handler: function( request, reply ) {
-      reply( {} );
+    handler: function (request, reply) {
+      reply({})
     }
   },
   {
@@ -18,8 +18,8 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {} );
+    handler: function (request, reply) {
+      reply({})
     }
   },
   {
@@ -30,10 +30,10 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         foo: 'bar'
-      } );
+      })
     }
   },
 
@@ -45,13 +45,13 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         test: {
           id: '123456789',
           foo: 'bar'
         }
-      } );
+      })
     }
   },
 
@@ -63,13 +63,13 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         test: [ {
           id: '123456789',
           foo: 'bar'
         } ]
-      } );
+      })
     }
   },
   {
@@ -80,12 +80,12 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         test: [ {
           foo: 'bar'
         } ]
-      } );
+      })
     }
   },
   {
@@ -96,8 +96,8 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         test: [ {
           foo: 'bar',
           links: {
@@ -107,7 +107,7 @@ module.exports = [
             }
           }
         } ]
-      } );
+      })
     }
   },
   {
@@ -118,8 +118,8 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         test: [ {
           foo: 'bar',
           links: {
@@ -129,7 +129,7 @@ module.exports = [
             }
           }
         } ]
-      } );
+      })
     }
   },
   {
@@ -140,8 +140,8 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         test: [ {
           foo: 'bar',
           links: {
@@ -150,7 +150,7 @@ module.exports = [
             }
           }
         } ]
-      } );
+      })
     }
   },
   {
@@ -161,8 +161,8 @@ module.exports = [
         resourceName: 'test'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         test: [ {
           foo: 'bar',
           links: {
@@ -171,7 +171,7 @@ module.exports = [
             }
           }
         } ]
-      } );
+      })
     }
   },
   {
@@ -187,14 +187,14 @@ module.exports = [
         resourceName: 'primaryResource'
       }
     },
-    handler: function( request, reply ) {
+    handler: function (request, reply) {
       // setup the include proxy
       request.data = {
         query: {
           include: request.query.include
         }
-      };
-      reply( {
+      }
+      reply({
         primaryResource: [ {
           foo: 'bar',
           links: {
@@ -204,7 +204,7 @@ module.exports = [
             }
           }
         } ]
-      } );
+      })
     }
   },
   {
@@ -215,12 +215,12 @@ module.exports = [
         resourceName: 'secondaryResource'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         secondaryResource: [ {
           foo: 'bar'
         } ]
-      } );
+      })
     }
   },
   {
@@ -239,15 +239,15 @@ module.exports = [
         resourceName: 'primaryContextResource'
       }
     },
-    handler: function( request, reply ) {
+    handler: function (request, reply) {
       // setup the include and context proxy
       request.data = {
         query: {
           include: request.query.include,
           context: request.query.context
         }
-      };
-      reply( {
+      }
+      reply({
         primaryContextResource: [ {
           foo: 'bar',
           links: {
@@ -257,7 +257,7 @@ module.exports = [
             }
           }
         } ]
-      } );
+      })
     }
   },
   {
@@ -273,15 +273,15 @@ module.exports = [
         resourceName: 'secondaryContextResource'
       }
     },
-    handler: function( request, reply ) {
+    handler: function (request, reply) {
       // note we're conditionally adding the a boolean to flag whether the
       // additionalContextInfo context was proxied successfully
-      reply( {
+      reply({
         secondaryContextResource: [ {
           foo: 'bar',
           additionalContextInfo: request.query.context.secondaryContextResource.additionalContextInfo ? true : false
         } ]
-      } );
+      })
     }
   },
   {
@@ -297,14 +297,14 @@ module.exports = [
         resourceName: 'anotherPrimaryResource'
       }
     },
-    handler: function( request, reply ) {
+    handler: function (request, reply) {
       // setup the include proxy
       request.data = {
         query: {
           include: request.query.include
         }
-      };
-      reply( {
+      }
+      reply({
         anotherPrimaryResource: [ {
           foo: 'bar',
           links: {
@@ -319,7 +319,7 @@ module.exports = [
             hey: 'you guys'
           } ]
         }
-      } );
+      })
     }
   },
   {
@@ -330,8 +330,8 @@ module.exports = [
         resourceName: 'secondaryResourceWithLinked'
       }
     },
-    handler: function( request, reply ) {
-      reply( {
+    handler: function (request, reply) {
+      reply({
         secondaryResourceWithLinked: [ {
           foo: 'bar'
         } ],
@@ -340,21 +340,21 @@ module.exports = [
             optimusPrime: 'isCool'
           } ]
         }
-      } );
+      })
     }
   },
   {
     method: 'GET',
     path: '/',
-    handler: function( request, reply ) {
-      reply( require( './loutReply.js' ) );
+    handler: function (request, reply) {
+      reply(require('./loutReply.js'))
     }
   },
   {
     method: 'DELETE',
     path: '/delete',
-    handler: function( request, reply ) {
-      reply().code( 204 );
+    handler: function (request, reply) {
+      reply().code(204)
     }
   }
-];
+]

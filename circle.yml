@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 4.4.4
+    version: 6.9.4
 dependencies:
   pre:
     - npm install git+ssh://git@github.com:holidayextras/deployment-helpers.git
@@ -11,7 +11,7 @@ test:
     - mkdir -p $CIRCLE_TEST_REPORTS/unit
     - mkdir -p $CIRCLE_TEST_REPORTS/coverage
   override:
-    - node_modules/.bin/make-up lib test
+    - npm run lint
     - istanbul cover _mocha --  --timeout 15000 --recursive test/**/*Test.js -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml
   post:
     - cp -r ./coverage/ $CIRCLE_ARTIFACTS/coverage
