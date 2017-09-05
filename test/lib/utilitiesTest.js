@@ -113,6 +113,31 @@ describe('utilities', function () {
 
       return expect(utilities.getSubResources(stateObject)).to.eventually.deep.equal(stateObject)
     })
+
+    it('should not attach any already linked sub resources', function () {
+      var stateObject = {
+        resources: [
+          {
+            id: 'ID',
+            links: {
+              LINK1: {
+                ids: ['LINK_ID1'],
+                type: 'LINK1'
+              }
+            }
+          }
+        ],
+        includes: ['LINK1'],
+        linked: {
+          LINK1: []
+        }
+      }
+
+      var expected = _.cloneDeep(stateObject)
+      expected.subResourceRequests = {}
+
+      return expect(utilities.getSubResources(stateObject)).to.eventually.deep.equal(expected)
+    })
   })
 
   describe('#resolveLinkedData', function () {
@@ -356,7 +381,6 @@ describe('utilities', function () {
       expect(links).to.be.deep.equal(expected)
     })
   })
-  // _requestSubResource
 
   describe('#collectProxyableValues', function () {
     var stateObject = {
