@@ -138,6 +138,38 @@ describe('utilities', function () {
 
       return expect(utilities.getSubResources(stateObject)).to.eventually.deep.equal(expected)
     })
+
+    it('should not attach any already linked sub resources, but still add unlinked ones', function () {
+      var stateObject = {
+        resources: [
+          {
+            id: 'ID',
+            links: {
+              LINK1: {
+                ids: ['LINK_ID1'],
+                type: 'LINK1'
+              },
+              LINK2: {
+                ids: ['LINK_ID2'],
+                type: 'LINK2'
+              }
+            }
+          }
+        ],
+        includes: ['LINK1', 'LINK2'],
+        linked: {
+          LINK1: []
+        }
+      }
+
+      var expected = _.cloneDeep(stateObject)
+      expected.subResourceRequests = {
+        LINK2: {
+          ids: ['LINK_ID2']
+        }
+      }
+      return expect(utilities.getSubResources(stateObject)).to.eventually.deep.equal(expected)
+    })
   })
 
   describe('#resolveLinkedData', function () {
