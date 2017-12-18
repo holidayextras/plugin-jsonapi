@@ -14,7 +14,7 @@
   "license": "MIT",
   "main": "index",
   "engines": {
-    "node": ">=6.9.4"
+    "node": ">=8.9.3"
   },
   "scripts": {
     "ci": "istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
