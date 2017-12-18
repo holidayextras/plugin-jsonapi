@@ -298,7 +298,7 @@ describe('pluginJsonapi', function () {
     })
   })
 
-  //having to skip these as not to sure how to test reply.continue
+  // having to skip these as not to sure how to test reply.continue
   describe.skip('#alsoMakeItSo', function () {
     it('should return early when isBoom is true', function () {
       var request = {
