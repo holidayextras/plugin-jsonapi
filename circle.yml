@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 8.9.3
+    version: 8.9.4
 dependencies:
   pre:
     - npm install git+ssh://git@github.com:holidayextras/deployment-helpers.git
