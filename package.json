@@ -31,7 +31,7 @@
     "coverage-percentage": "^0.0.2",
     "deployment-helpers": "git+ssh://git@github.com:holidayextras/deployment-helpers.git",
     "dirty-chai": "^1.2.2",
-    "hapi": "17.1.1",
+    "hapi": "17.x.x",
     "hapi-qs": "git+ssh://git@github.com/soxhub/hapi-qs.git#master",
     "istanbul": "^1.1.0-alpha.1",
     "joi": "10.4.1",
@@ -46,6 +46,9 @@
     "lodash": "4.17.4",
     "q": "1.5.1",
     "qs": "6.5.1"
+  },
+  "peerDependencies": {
+    "hapi": "^17.x.x"
   },
   "standard": {
     "globals": [
