@@ -1,7 +1,5 @@
 # plugin-jsonapi
 
-[![Circle CI](https://circleci.com/gh/holidayextras/plugin-jsonapi/tree/master.svg?style=svg&circle-token=e30239f6be095cb1c8e0dd8d99f3bf2348ec63ca)](https://circleci.com/gh/holidayextras/plugin-jsonapi)
-
 ## About
 
 A [hapi](http://hapijs.com/) plugin for a jsonapi style output to all requests.  We are using the [jsonapi](http://jsonapi.org/) standard with our own [house rules](https://bitbucket.org/hxshortbreaks/apischema/src/master/houseRules.md) where we have adapted the standard to suit our needs as a business.
