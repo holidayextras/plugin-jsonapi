@@ -22,7 +22,8 @@
     "prerelease": "node_modules/deployment-helpers/nodeApps/preRelease.sh",
     "pretest": "npm run prerelease",
     "test:coverage": "NODE_PATH=${PWD} istanbul cover _mocha",
-    "test": "npm run lint && npm run test:coverage"
+    "test": "npm run lint && npm run test:coverage",
+    "deploy": "exit 0"
   },
   "devDependencies": {
     "@soxhub/hapi-qs": "git+ssh://git@github.com/soxhub/hapi-qs.git#master",
@@ -61,5 +62,8 @@
       "it",
       "expect"
     ]
-  }
+  },
+  "owner": "sb-backoffice",
+  "platform": "custom",
+  "ci": "dockyard"
 }
