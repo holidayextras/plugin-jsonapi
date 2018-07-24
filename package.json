@@ -17,13 +17,13 @@
     "node": ">=8.9.3"
   },
   "scripts": {
-    "ci": "istanbul cover _mocha -- -R xunit > $CIRCLE_TEST_REPORTS/unit/results.xml",
+    "ci": "echo 'nothing to do here'",
     "lint": "standard",
     "prerelease": "node_modules/deployment-helpers/nodeApps/preRelease.sh",
     "pretest": "npm run prerelease",
     "test:coverage": "NODE_PATH=${PWD} istanbul cover _mocha",
     "test": "npm run lint && npm run test:coverage",
-    "deploy": "exit 0"
+    "deploy": "./scripts/deploy.sh"
   },
   "devDependencies": {
     "@soxhub/hapi-qs": "git+ssh://git@github.com/soxhub/hapi-qs.git#master",
