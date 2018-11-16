@@ -1,7 +1,7 @@
 {
   "name": "plugin-jsonapi",
   "description": "A hapi plugin for a jsonapi style output according to our 'house rules'",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "homepage": "https://github.com/holidayextras/plugin-jsonapi",
   "author": {
     "name": "Shortbreaks",
@@ -36,7 +36,7 @@
     "hapi-qs": "git+ssh://git@github.com/soxhub/hapi-qs.git#master",
     "istanbul": "^1.1.0-alpha.1",
     "joi": "10.4.1",
-    "mocha": "^3.0.2",
+    "mocha": "^5.2.0",
     "sinon": "^1.17.4",
     "sinon-as-promised": "^4.0.2",
     "sinon-chai": "^2.8.0",
