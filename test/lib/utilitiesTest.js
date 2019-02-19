@@ -272,6 +272,33 @@ describe('utilities', function () {
 
       expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected)
     })
+
+    it('should return an URL the type and the context added as a query string', function () {
+      var hrefParameters = {
+        type: 'TYPE',
+        context: {
+          CONTEXT: ['CONTEXT_VALUE']
+        }
+      }
+
+      var expected = '/TYPE/?context%5BCONTEXT%5D%5B0%5D=CONTEXT_VALUE'
+
+      expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected)
+    })
+
+    it('should return an URL the type, ids and the context added as a query string', function () {
+      var hrefParameters = {
+        ids: ['ID1', 'ID2'],
+        type: 'TYPE',
+        context: {
+          CONTEXT: ['CONTEXT_VALUE']
+        }
+      }
+
+      var expected = '/TYPE/ID1,ID2?context%5BCONTEXT%5D%5B0%5D=CONTEXT_VALUE'
+
+      expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected)
+    })
   })
 
   describe('#_addSubResourceRequest', function () {
@@ -360,6 +387,29 @@ describe('utilities', function () {
           ids: [],
           filter: {
             FILTER: ['FILTER_VALUE1', 'FILTER_VALUE2']
+          }
+        }
+      }
+
+      utilities._addSubResourceRequest(subResources, link)
+      expect(subResources).to.be.deep.equal(expected)
+    })
+
+    it('should add the link to the subResources (new context)', function () {
+      var link = {
+        context: {
+          CONTEXT: ['CONTEXT_VALUE']
+        },
+        type: 'TYPE'
+      }
+
+      var subResources = {}
+
+      var expected = {
+        TYPE: {
+          ids: [],
+          context: {
+            CONTEXT: ['CONTEXT_VALUE']
           }
         }
       }
