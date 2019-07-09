@@ -32,7 +32,7 @@ describe('pluginJsonapi', function () {
     console.log(pluginJsonapi)
     await server.register([
       pluginJsonapi,
-      require('@soxhub/hapi-qs')
+      require('hapi-qs')
     ])
   })
 
