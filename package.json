@@ -48,7 +48,7 @@
     "qs": "6.5.1"
   },
   "peerDependencies": {
-    "@hapi/hapi": "^20.x.x"
+    "@hapi/hapi": "^21.x.x"
   },
   "standard": {
     "globals": [
