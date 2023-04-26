@@ -1,6 +1,6 @@
 'use strict'
 
-var chai = require('chai')
+const chai = require('chai')
 global.expect = chai
   .use(require('chai-as-promised'))
   .use(require('dirty-chai'))
