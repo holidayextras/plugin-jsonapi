@@ -1,6 +1,6 @@
 /* eslint no-unneeded-ternary:0 */
 'use strict'
-var Joi = require('joi')
+const Joi = require('joi')
 
 module.exports = [
   {
@@ -65,10 +65,10 @@ module.exports = [
     },
     handler: function (request, reply) {
       return {
-        test: [ {
+        test: [{
           id: '123456789',
           foo: 'bar'
-        } ]
+        }]
       }
     }
   },
@@ -82,9 +82,9 @@ module.exports = [
     },
     handler: function (request, reply) {
       return {
-        test: [ {
+        test: [{
           foo: 'bar'
-        } ]
+        }]
       }
     }
   },
@@ -98,7 +98,7 @@ module.exports = [
     },
     handler: function (request, reply) {
       return {
-        test: [ {
+        test: [{
           foo: 'bar',
           links: {
             anotherTest: {
@@ -106,7 +106,7 @@ module.exports = [
               type: 'anotherTest'
             }
           }
-        } ]
+        }]
       }
     }
   },
@@ -120,15 +120,15 @@ module.exports = [
     },
     handler: function (request, reply) {
       return {
-        test: [ {
+        test: [{
           foo: 'bar',
           links: {
             anotherTest: {
-              ids: [ 1, 2 ],
+              ids: [1, 2],
               type: 'anotherTest'
             }
           }
-        } ]
+        }]
       }
     }
   },
@@ -142,14 +142,14 @@ module.exports = [
     },
     handler: function (request, reply) {
       return {
-        test: [ {
+        test: [{
           foo: 'bar',
           links: {
             anotherTest: {
-              ids: [ 1, 2 ]
+              ids: [1, 2]
             }
           }
-        } ]
+        }]
       }
     }
   },
@@ -163,14 +163,14 @@ module.exports = [
     },
     handler: function (request, reply) {
       return {
-        test: [ {
+        test: [{
           foo: 'bar',
           links: {
             anotherTest: {
               type: 'anotherTest'
             }
           }
-        } ]
+        }]
       }
     }
   },
@@ -195,7 +195,7 @@ module.exports = [
         }
       }
       return {
-        primaryResource: [ {
+        primaryResource: [{
           foo: 'bar',
           links: {
             secondaryResource: {
@@ -203,7 +203,7 @@ module.exports = [
               type: 'secondaryResource'
             }
           }
-        } ]
+        }]
       }
     }
   },
@@ -217,9 +217,9 @@ module.exports = [
     },
     handler: function (request, reply) {
       return {
-        secondaryResource: [ {
+        secondaryResource: [{
           foo: 'bar'
-        } ]
+        }]
       }
     }
   },
@@ -248,7 +248,7 @@ module.exports = [
         }
       }
       return {
-        primaryContextResource: [ {
+        primaryContextResource: [{
           foo: 'bar',
           links: {
             secondaryContextResource: {
@@ -256,7 +256,7 @@ module.exports = [
               type: 'secondaryContextResource'
             }
           }
-        } ]
+        }]
       }
     }
   },
@@ -274,13 +274,13 @@ module.exports = [
       }
     },
     handler: function (request, reply) {
-      // note we're conditionally adding the a boolean to flag whether the
+      // note we're conditionally adding a boolean to flag whether the
       // additionalContextInfo context was proxied successfully
       return {
-        secondaryContextResource: [ {
+        secondaryContextResource: [{
           foo: 'bar',
-          additionalContextInfo: request.query.context.secondaryContextResource.additionalContextInfo ? true : false
-        } ]
+          additionalContextInfo: request.query.context?.secondaryContextResource?.additionalContextInfo ? true : false
+        }]
       }
     }
   },
@@ -305,7 +305,7 @@ module.exports = [
         }
       }
       return {
-        anotherPrimaryResource: [ {
+        anotherPrimaryResource: [{
           foo: 'bar',
           links: {
             secondaryResourceWithLinked: {
@@ -313,11 +313,11 @@ module.exports = [
               type: 'secondaryResourceWithLinked'
             }
           }
-        } ],
+        }],
         linked: {
-          primaryLinkedResource: [ {
+          primaryLinkedResource: [{
             hey: 'you guys'
-          } ]
+          }]
         }
       }
     }
@@ -332,13 +332,13 @@ module.exports = [
     },
     handler: function (request, reply) {
       return {
-        secondaryResourceWithLinked: [ {
+        secondaryResourceWithLinked: [{
           foo: 'bar'
-        } ],
+        }],
         linked: {
-          secondaryLinkedResource: [ {
+          secondaryLinkedResource: [{
             optimusPrime: 'isCool'
-          } ]
+          }]
         }
       }
     }

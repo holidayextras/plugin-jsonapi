@@ -1,11 +1,12 @@
 /* eslint no-unused-expressions:0 */
 'use strict'
 
-var Hapi = require('hapi')
+const Hapi = require('@hapi/hapi')
+const Qs = require('qs')
 
-var pluginJsonapi = require('../../lib/pluginJsonapi')
-var pluginName = 'plugin-jsonapi'
-var server
+const pluginJsonapi = require('../../lib/pluginJsonapi')
+const pluginName = 'plugin-jsonapi'
+let server
 
 process.env.NODE_ENV = 'test'
 
@@ -16,9 +17,11 @@ describe('pluginJsonapi', function () {
       port: 1234,
       router: {
         stripTrailingSlash: false
+      },
+      query: {
+        parser: (query) => Qs.parse(query)
       }
     })
-    server.route(require('./fixtures/routes'))
 
     // the plugin expects a few functions to return stuff to register properly
     // simulate that here so we don't try and talk to them
@@ -31,9 +34,10 @@ describe('pluginJsonapi', function () {
     }) // not testing the cache either
     console.log(pluginJsonapi)
     await server.register([
-      pluginJsonapi,
-      require('hapi-qs')
+      pluginJsonapi
     ])
+    await server.validator(require('joi'))
+    server.route(require('./fixtures/routes'))
   })
 
   afterEach(function () {
@@ -119,7 +123,7 @@ describe('pluginJsonapi', function () {
       const reply = await server.inject('/dontAddHrefToResource')
       expect(reply.result).to.deep.equal({
         test: [
-            { foo: 'bar' }
+          { foo: 'bar' }
         ]
       })
     })
@@ -151,7 +155,7 @@ describe('pluginJsonapi', function () {
             foo: 'bar',
             links: {
               anotherTest: {
-                ids: [ 1, 2 ],
+                ids: [1, 2],
                 type: 'anotherTest',
                 href: '/anotherTest/1,2'
               }
@@ -170,7 +174,7 @@ describe('pluginJsonapi', function () {
             foo: 'bar',
             links: {
               anotherTest: {
-                ids: [ 1, 2 ]
+                ids: [1, 2]
               }
             }
           }
@@ -215,7 +219,7 @@ describe('pluginJsonapi', function () {
         ],
         linked: {
           secondaryResource: [
-              { foo: 'bar' }
+            { foo: 'bar' }
           ]
         }
       })
@@ -264,13 +268,13 @@ describe('pluginJsonapi', function () {
         ],
         linked: {
           primaryLinkedResource: [
-              { hey: 'you guys' }
+            { hey: 'you guys' }
           ],
           secondaryLinkedResource: [
-              { optimusPrime: 'isCool' }
+            { optimusPrime: 'isCool' }
           ],
           secondaryResourceWithLinked: [
-              { foo: 'bar' }
+            { foo: 'bar' }
           ]
         }
       })
@@ -279,16 +283,16 @@ describe('pluginJsonapi', function () {
 
   describe('#errorHandler', function () {
     it('should call the request log with an error', function () {
-      var request = {
+      const request = {
         log: sandbox.spy(),
         data: 'DATA'
       }
 
-      var requestLogSpy = request.log
-      var reply = sandbox.stub()
-      var error = new Error('ERROR_HANDLER')
+      const requestLogSpy = request.log
+      const reply = sandbox.stub()
+      const error = new Error('ERROR_HANDLER')
 
-      var expectedRequestLogWithArgument2 = {
+      const expectedRequestLogWithArgument2 = {
         error: 'Error: ERROR_HANDLER',
         data: 'DATA'
       }
@@ -301,33 +305,33 @@ describe('pluginJsonapi', function () {
   // having to skip these as not to sure how to test reply.continue
   describe.skip('#alsoMakeItSo', function () {
     it('should return early when isBoom is true', function () {
-      var request = {
+      const request = {
         response: {
           isBoom: true
         }
       }
 
-      var reply = {
+      const reply = {
         continue: sandbox.spy()
       }
-      var replyContinueSpy = reply.continue
+      const replyContinueSpy = reply.continue
 
       pluginJsonapi.alsoMakeItSo(request, reply)
       expect(replyContinueSpy).to.be.calledOnce()
     })
 
     it('should throw an error when the request.route.settings.bind.resourceName is not set', function () {
-      var errorHandlerSpy = sandbox.spy(pluginJsonapi, 'errorHandler')
-      var request = {
+      const errorHandlerSpy = sandbox.spy(pluginJsonapi, 'errorHandler')
+      const request = {
         log: sandbox.spy(),
         response: {
           source: 'SOURCE'
         }
       }
 
-      var requestLogSpy = request.log
+      const requestLogSpy = request.log
 
-      var reply = sandbox.stub()
+      const reply = sandbox.stub()
 
       pluginJsonapi.alsoMakeItSo(request, reply)
       expect(errorHandlerSpy).to.be.calledOnce()
@@ -336,7 +340,7 @@ describe('pluginJsonapi', function () {
     })
 
     it('should return early when no resources are found', function () {
-      var request = {
+      const request = {
         response: {
           isBoom: false,
           source: {
@@ -352,10 +356,10 @@ describe('pluginJsonapi', function () {
         }
       }
 
-      var reply = {
+      const reply = {
         continue: sandbox.spy()
       }
-      var replyContinueSpy = reply.continue
+      const replyContinueSpy = reply.continue
 
       pluginJsonapi.alsoMakeItSo(request, reply)
       expect(replyContinueSpy).to.be.calledOnce()

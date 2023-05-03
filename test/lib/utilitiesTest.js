@@ -1,8 +1,8 @@
 'use strict'
 
-var utilities = require('../../lib/utilities')
-var _ = require('lodash')
-var Q = require('q')
+const utilities = require('../../lib/utilities')
+const _ = require('lodash')
+const Q = require('q')
 
 describe('utilities', function () {
   afterEach(function () {
@@ -11,19 +11,19 @@ describe('utilities', function () {
 
   describe('#collectIncludes', function () {
     it('should collect the include and add it to the stateObject', function () {
-      var stateObject = {}
+      const stateObject = {}
       _.set(stateObject, 'request.data.query.include', 'foo')
 
-      var expected = _.cloneDeep(stateObject)
+      const expected = _.cloneDeep(stateObject)
       expected.includes = ['foo']
 
       return expect(utilities.collectIncludes(stateObject)).to.eventually.deep.equal(expected)
     })
 
     it('should return foo and bar in an array on the stateObject', function () {
-      var stateObject = {}
+      const stateObject = {}
       _.set(stateObject, 'request.data.query.include', 'foo,bar')
-      var expected = stateObject
+      const expected = stateObject
       expected.includes = ['foo', 'bar']
 
       return expect(utilities.collectIncludes(stateObject)).to.eventually.deep.equal(expected)
@@ -40,7 +40,7 @@ describe('utilities', function () {
     })
 
     it('should return early as there are no ids on the resource', function () {
-      var stateObject = {
+      const stateObject = {
         resources: 'RESOURCES'
       }
 
@@ -48,7 +48,7 @@ describe('utilities', function () {
     })
 
     it('should build a href for the resource', function () {
-      var stateObject = {
+      const stateObject = {
         resources: [
           {
             id: 'ID'
@@ -57,7 +57,7 @@ describe('utilities', function () {
       }
       _.set(stateObject, 'request.route.settings.bind.resourceName', 'TYPE')
 
-      var expected = _.cloneDeep(stateObject)
+      const expected = _.cloneDeep(stateObject)
       expected.resources = [
         {
           id: 'ID',
@@ -71,7 +71,7 @@ describe('utilities', function () {
 
   describe('#getSubResources', function () {
     it('should add a sub resource', function () {
-      var stateObject = {
+      const stateObject = {
         resources: [
           {
             id: 'ID',
@@ -86,7 +86,7 @@ describe('utilities', function () {
         includes: ['LINK1']
       }
 
-      var expected = _.cloneDeep(stateObject)
+      const expected = _.cloneDeep(stateObject)
       expected.subResourceRequests = {
         LINK1: {
           ids: ['LINK_ID1']
@@ -97,7 +97,7 @@ describe('utilities', function () {
     })
 
     it('should not attach any sub resources as nothing is included', function () {
-      var stateObject = {
+      const stateObject = {
         resources: [
           {
             id: 'ID',
@@ -115,7 +115,7 @@ describe('utilities', function () {
     })
 
     it('should not attach any already linked sub resources', function () {
-      var stateObject = {
+      const stateObject = {
         resources: [
           {
             id: 'ID',
@@ -133,14 +133,14 @@ describe('utilities', function () {
         }
       }
 
-      var expected = _.cloneDeep(stateObject)
+      const expected = _.cloneDeep(stateObject)
       expected.subResourceRequests = {}
 
       return expect(utilities.getSubResources(stateObject)).to.eventually.deep.equal(expected)
     })
 
     it('should not attach any already linked sub resources, but still add unlinked ones', function () {
-      var stateObject = {
+      const stateObject = {
         resources: [
           {
             id: 'ID',
@@ -162,7 +162,7 @@ describe('utilities', function () {
         }
       }
 
-      var expected = _.cloneDeep(stateObject)
+      const expected = _.cloneDeep(stateObject)
       expected.subResourceRequests = {
         LINK2: {
           ids: ['LINK_ID2']
@@ -189,7 +189,7 @@ describe('utilities', function () {
     })
 
     it('should attach the sub reources as linked', function () {
-      var stateObject = {
+      const stateObject = {
         request: {
           response: {
             source: {
@@ -204,7 +204,7 @@ describe('utilities', function () {
         }
       }
 
-      var expected = {
+      const expected = {
         result: 'RESULT',
         linked: {
           SUBRESOURCE1: [
@@ -217,50 +217,50 @@ describe('utilities', function () {
       }
 
       return utilities.resolveLinkedData(stateObject)
-      .then(function () {
-        return expect(stateObject.request.response.source).to.be.deep.equal(expected)
-      })
+        .then(function () {
+          return expect(stateObject.request.response.source).to.be.deep.equal(expected)
+        })
     })
   })
 
   describe('#_buildHref', function () {
     it('should return an URL the type and id', function () {
-      var hrefParameters = {
+      const hrefParameters = {
         ids: ['ID'],
         type: 'TYPE'
       }
 
-      var expected = '/TYPE/ID'
+      const expected = '/TYPE/ID'
 
       expect(utilities._buildHref(hrefParameters)).to.be.equal(expected)
     })
 
     it('should return an URL the type and the ids as comma separated list', function () {
-      var hrefParameters = {
+      const hrefParameters = {
         ids: ['ID1', 'ID2'],
         type: 'TYPE'
       }
 
-      var expected = '/TYPE/ID1,ID2'
+      const expected = '/TYPE/ID1,ID2'
 
       expect(utilities._buildHref(hrefParameters)).to.be.equal(expected)
     })
 
     it('should return an URL the type and the filter added as a query string', function () {
-      var hrefParameters = {
+      const hrefParameters = {
         type: 'TYPE',
         filter: {
           FILTER: ['FILTER_VALUE']
         }
       }
 
-      var expected = '/TYPE/?filter%5BFILTER%5D=FILTER_VALUE'
+      const expected = '/TYPE/?filter%5BFILTER%5D=FILTER_VALUE'
 
       expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected)
     })
 
     it('should return an URL the type, ids and the filter added as a query string', function () {
-      var hrefParameters = {
+      const hrefParameters = {
         ids: ['ID1', 'ID2'],
         type: 'TYPE',
         filter: {
@@ -268,26 +268,26 @@ describe('utilities', function () {
         }
       }
 
-      var expected = '/TYPE/ID1,ID2?filter%5BFILTER%5D=FILTER_VALUE'
+      const expected = '/TYPE/ID1,ID2?filter%5BFILTER%5D=FILTER_VALUE'
 
       expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected)
     })
 
     it('should return an URL the type and the context added as a query string', function () {
-      var hrefParameters = {
+      const hrefParameters = {
         type: 'TYPE',
         context: {
           CONTEXT: ['CONTEXT_VALUE']
         }
       }
 
-      var expected = '/TYPE/?context%5BCONTEXT%5D%5B0%5D=CONTEXT_VALUE'
+      const expected = '/TYPE/?context%5BCONTEXT%5D%5B0%5D=CONTEXT_VALUE'
 
       expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected)
     })
 
     it('should return an URL the type, ids and the context added as a query string', function () {
-      var hrefParameters = {
+      const hrefParameters = {
         ids: ['ID1', 'ID2'],
         type: 'TYPE',
         context: {
@@ -295,7 +295,7 @@ describe('utilities', function () {
         }
       }
 
-      var expected = '/TYPE/ID1,ID2?context%5BCONTEXT%5D%5B0%5D=CONTEXT_VALUE'
+      const expected = '/TYPE/ID1,ID2?context%5BCONTEXT%5D%5B0%5D=CONTEXT_VALUE'
 
       expect(utilities._buildHref(hrefParameters, undefined, {})).to.be.equal(expected)
     })
@@ -303,14 +303,14 @@ describe('utilities', function () {
 
   describe('#_addSubResourceRequest', function () {
     it('should add the link to the subResources', function () {
-      var link = {
+      const link = {
         ids: ['ID'],
         type: 'TYPE'
       }
 
-      var subResources = {}
+      const subResources = {}
 
-      var expected = {
+      const expected = {
         TYPE: {
           ids: ['ID']
         }
@@ -321,18 +321,18 @@ describe('utilities', function () {
     })
 
     it('should add a new id to the already existing subResource', function () {
-      var link = {
+      const link = {
         ids: ['ID2'],
         type: 'TYPE'
       }
 
-      var subResources = {
+      const subResources = {
         TYPE: {
           ids: ['ID1']
         }
       }
 
-      var expected = {
+      const expected = {
         TYPE: {
           ids: ['ID1', 'ID2']
         }
@@ -343,16 +343,16 @@ describe('utilities', function () {
     })
 
     it('should add the link to the subResources (new filter)', function () {
-      var link = {
+      const link = {
         filter: {
           FILTER: ['FILTER_VALUE']
         },
         type: 'TYPE'
       }
 
-      var subResources = {}
+      const subResources = {}
 
-      var expected = {
+      const expected = {
         TYPE: {
           ids: [],
           filter: {
@@ -366,14 +366,14 @@ describe('utilities', function () {
     })
 
     it('should add a new filter id to the alredy existed subResource (new filter)', function () {
-      var link = {
+      const link = {
         filter: {
           FILTER: ['FILTER_VALUE2']
         },
         type: 'TYPE'
       }
 
-      var subResources = {
+      const subResources = {
         TYPE: {
           ids: [],
           filter: {
@@ -382,7 +382,7 @@ describe('utilities', function () {
         }
       }
 
-      var expected = {
+      const expected = {
         TYPE: {
           ids: [],
           filter: {
@@ -396,16 +396,16 @@ describe('utilities', function () {
     })
 
     it('should add the link to the subResources (new context)', function () {
-      var link = {
+      const link = {
         context: {
           CONTEXT: ['CONTEXT_VALUE']
         },
         type: 'TYPE'
       }
 
-      var subResources = {}
+      const subResources = {}
 
-      var expected = {
+      const expected = {
         TYPE: {
           ids: [],
           context: {
@@ -425,14 +425,14 @@ describe('utilities', function () {
     })
 
     it('should build the href for the resource', function () {
-      var links = [
+      const links = [
         {
           ids: ['ID'],
           type: 'TYPE'
         }
       ]
 
-      var expected = [
+      const expected = [
         {
           ids: ['ID'],
           type: 'TYPE',
@@ -445,14 +445,14 @@ describe('utilities', function () {
     })
 
     it('should build the href for the resource and remove the filter', function () {
-      var links = [
+      const links = [
         {
           filter: 'FILTER',
           type: 'TYPE'
         }
       ]
 
-      var expected = [
+      const expected = [
         {
           type: 'TYPE',
           href: 'HREF'
@@ -465,7 +465,7 @@ describe('utilities', function () {
   })
 
   describe('#collectProxyableValues', function () {
-    var stateObject = {
+    const stateObject = {
       request: {
         data: {
           query: {
@@ -500,7 +500,7 @@ describe('utilities', function () {
       ]
     }
 
-    var expectedStateObject = {
+    const expectedStateObject = {
       request: {
         data: {
           query: {
@@ -553,9 +553,9 @@ describe('utilities', function () {
 
     it('should build up an object of values to be proxied back up', function () {
       return utilities.collectProxyableValues(stateObject)
-      .then(function (result) {
-        expect(result).to.deep.equal(expectedStateObject)
-      })
+        .then(function (result) {
+          expect(result).to.deep.equal(expectedStateObject)
+        })
     })
   })
 })
