@@ -62,7 +62,7 @@
       "expect"
     ]
   },
-  "owner": "sb-backoffice",
+  "owner": "buying",
   "platform": "custom",
   "ci": "dockyard"
 }
